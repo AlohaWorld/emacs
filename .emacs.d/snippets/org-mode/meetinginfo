@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: meetinginfo
+# key: meetinginfo
+# binding: direct-keybinding
+# expand-env: ((some-var some-value))
+# type: command
+# --
+| 会议日期 |			 |
+| 会议时间 |  			 |
+| 会议地点 |             |
+| 类型     |             |
+| 主持人   |             |
+| 记录者   |             |
+| 与会者   |             |

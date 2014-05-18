@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: (user's full name)
+# key: myname
+# --
+`(replace-regexp-in-string "^" "" user-full-name)`
