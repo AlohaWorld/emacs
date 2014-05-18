@@ -1,0 +1,5 @@
+把下载回来的 emacs-w3m 目录放在 emacs 的 site-lisp 目录下，然后在当前目录执行 
+emacs -batch -q -no-site-file -l w3mhack.el NONE -f w3mhack-nonunix-install，
+那就会生成相应的 w3m-load 以及其他一些文件，且会安装。（此处不能用 cygwin 的 ./configure 和 make，make install，因为那样只能装在 cygwin 里面的旧版 emacs 21 或 emacs 22 中） 
+
+
