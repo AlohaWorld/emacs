@@ -1,0 +1,16 @@
+dot.emacs.reference
+.recentf
+.ido.last
+*~
+*.orig
+*.elc
+/.emacs.d/.org-id-locations
+/.emacs.d/bookmarks
+/.emacs.d/history
+/.emacs.d/ac-comphist.dat
+/.emacs.d/.emacs.desktop
+/.emacs.d/elpa-obsolete
+/.emacs.d/org-clock-save.el
+/.emacs.d/.emacs.desktop.lock
+/.emacs.d/emacs-server-file
+/.w3m

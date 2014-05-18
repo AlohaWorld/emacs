@@ -1,0 +1,29 @@
+Windows Registry Editor Version 5.00 
+ 
+[HKEY_CURRENT_USER\Software\GNU\Emacs] 
+# Here is where I put my emacs config files.
+# i.e., ".emacs.d" directory should be put in the below path 
+"HOME"="d:\\MyDocument\\60.Applications\\emacs\\" 
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\Emacs.exe] 
+@="C:\\home\\bin\\Emacs\\bin\\runemacs.exe"
+"Path"="C:\\home\\bin\\Emacs\\bin\\"
+
+# Because I usualy start emacs by typing Win key and then the name of emacs,
+# it's not a bad idea to give emacs another short name, i.e. "e"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\e.exe] 
+@="C:\\home\\bin\\Emacs\\bin\\runemacs.exe"
+"Path"="C:\\home\\bin\\Emacs\\bin\\"
+
+[HKEY_CLASSES_ROOT\*\shell]
+
+[HKEY_CLASSES_ROOT\*\shell\openwemacs]
+@="Edit With Emacs(&w)"
+# The above value appears in the global context menu,
+# i.e., when you right click on a file, you can start emacs with "w"
+# (The '&' makes the next character a shortcut.)
+
+[HKEY_CLASSES_ROOT\*\shell\openwemacs\command]
+@="C:\\home\\bin\\Emacs\\bin\\emacsclientw -n --alternate-editor=runemacs \"%1\""
+# The above has to point to where you install Emacs
