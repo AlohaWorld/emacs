@@ -104,6 +104,7 @@
 (global-set-key (kbd "C-<f11>") 'org-clock-in)            ;; I'm using org-mode's original keybindings C-c C-x C-i
 (global-set-key (kbd "C-s-<f12>") 'bh/save-then-publish)
 (global-set-key (kbd "C-c c") 'org-capture)               ;; I'm using org-mode's original keybindings C-c r
+(global-set-key (kbd "C-c r") 'org-capture)
 
 (defun bh/hide-other ()
   (interactive)
