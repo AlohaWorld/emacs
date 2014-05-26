@@ -275,6 +275,14 @@
 ;; Buffer 管理，将 C-x C-b 从Buffer Menu切换为 iBuffer
 (global-set-key (kbd "C-x C-b")      'ibuffer)
 
+
+;; ==================================================
+;; 切换到read-only-mode的时候，使用空格翻页
+(add-hook 'read-only-mode 
+		  '(lambda ()
+			 (local-set-key (kbd "<SPACE>") 'scroll-up-command)
+			)
+)
 ;; ==================================================
 ;; Buffer 字体缩放
 
