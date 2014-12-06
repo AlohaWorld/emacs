@@ -162,7 +162,10 @@
 ;; - 设置shell的颜色
 
 (load "init-color-face.el")
-
+;; (setq shell-file-name "C:/cygwin/bin/zsh.exe")
+;; "C:/cygwin/bin/zsh.exe")
+(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t) 
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
 ;; ========================================================
 ;; 设置Emacs的标题条文字
 (setq frame-title-format "%b - Emacs")
@@ -278,11 +281,12 @@
 
 ;; ==================================================
 ;; 切换到read-only-mode的时候，使用空格翻页
-(add-hook 'read-only-mode 
-		  '(lambda ()
-			 (local-set-key (kbd "<SPACE>") 'scroll-up-command)
-			)
-)
+;;   使用 view-mode 即可达到此种效果
+;;(add-hook 'read-only-mode 
+;;		  '(lambda ()
+;;			 (local-set-key (kbd "<SPACE>") 'scroll-up-command)
+;;			)
+;;)
 ;; ==================================================
 ;; Buffer 字体缩放
 
@@ -356,6 +360,19 @@
 
 
 ;;++以下内容与快捷键有关+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;; C-Space被系统输入法使用
+(global-unset-key (kbd "C-SPC")) 
+
+;; 将shift-space改为Mark Set
+;; (global-set-key (kbd "S-SPC") 'set-mark-command)
+;; 在win8 搜狗输入法之下，S-SPC是全角半角切换
+(global-set-key (kbd "M-SPC") 'set-mark-command)
+
+;; 将capslock键改为ctrl键
+(define-key function-key-map [(capslock)] 'event-apply-control-modifier)
+
+
 
 ;;跳到某一行 系统默认是 \M-gg 或者\M-g\M-g
 ;; (global-set-key "\M-gg" 'goto-line) ; 默认就是\M-gg，无需设置
@@ -597,7 +614,7 @@ occurence of CHAR."
 ;; ==================================================
 ;; setup helm
 (require 'helm-config)
-
+(helm-mode 1)
  
  ;; ========================================================
 ;; 设置emacs daemon模式（与Linux 的emacs daemon不同，需要先
@@ -629,3 +646,4 @@ occurence of CHAR."
 (setq server-auth-dir basicPath)
 (setq server-name "emacs-server-file")
 (server-start)
+

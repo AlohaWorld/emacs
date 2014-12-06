@@ -1,47 +1,11 @@
 ;;==============================================================================
 ;; In this init file, The attributes of fonts/colors are set
-;;
-;; Note: 
-;;    1.  For the number in (set-face-attribute 'default nil :height 100)
-;;        The value is in 1/10pt, so 100 will give you 10pt, etc.
-(custom-set-faces
- '(default (
-     (t 
-	   (:stipple nil 
-	    :background "#000000" 
-		:foreground "#ccccff" 
-		:inverse-video nil 
-		:box nil 
-		:strike-through nil 
-		:overline nil 
-		:underline nil 
-;;;		:slant normal 
-;;;		:weight normal 
-		:height 140
-;;		:height normal
-;;;		:width normal
-		:foundry "outline" 
-;;		:family "Courier New"))
-;;        :family "微软雅黑"))
-;;		:family "Lucida Bright"))
-;;		:family "Lucida Console"))
-		:family "Yahei Mono"))
-;;		:family "YaHei Consolas Hybrid"))
-;;		:family "楷体"))
-     )
-  )
-; here are 20 hanzi and 40 english chars, see if they are the same width
-; 你你你你你你你你你你你你你你你你你你你你
-; aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-; /aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/
-
-
 
 ;; 高亮行的背景
 ;; '(highline-face ((t (:background "#006600"))))
- '(highline-face ((t (:background "blue"))))
- '(org-mode-line-clock ((t (:background "grey75" :foreground "red" :box (:line-width -1 :style released-button)))) t)
-)
+'(highline-face ((t (:background "blue"))))
+'(org-mode-line-clock ((t (:background "grey75" :foreground "red" :box (:line-width -1 :style released-button)))) t)
+
 ;; ==================================================
 ;; 设置emacs窗口的颜色方案COLOR-THEME
 (require 'color-theme)
@@ -66,11 +30,6 @@
 (change-cursor-mode 1) ; On for overwrite/read-only/input mode
 (toggle-cursor-type-when-idle 1) ; On when idle
 
-
-
-
-
-
 ;; 设置另外一些颜色：语法高亮显示的背景和主题，区域选择的背景和主题，二次选择的背景和选择
 ;;(set-face-foreground 'highlight "white")
 ;;(set-face-background 'highlight "blue")
@@ -84,7 +43,61 @@
 (set-face-background 'holiday-face "slate blue")
 (set-face-foreground 'holiday-face "white")))
  
-;;-------------------------Shell 使用 ansi color-------------
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+;;------------------------------------------------------------------------------
+;; Note: 
+;;    1.  For the number in (set-face-attribute 'default nil :height 100)
+;;        The value is in 1/10pt, so 100 will give you 10pt, etc.
+;;    ;; Setting English Font 
+    (set-face-attribute 
+      'default nil :font "Consolas") 
+;;     'default nil :font "Lucida Sans Typewriter") 
+;;    ;; 'default nil :font "Lucida Console") 
+;;    
+;;    ;; Chinese Font 
+;;    (dolist (charset '(kana han symbol cjk-misc bopomofo)) 
+;;      (set-fontset-font (frame-parameter nil 'font) 
+;;    					charset 
+;;    					(font-spec :family "Yahei Mono" :size 16))) 
+;;					(font-spec :family "楷体" :size 20))) 
+(custom-set-faces
+ '(default (
+     (t 
+	   (:stipple nil 
+	    :background "#000000" 
+		:foreground "#ccccff" 
+		:inverse-video nil 
+		:box nil 
+		:strike-through nil 
+		:overline nil 
+		:underline nil 
+		:slant normal
+		:weight light 
+;; weight can be: light, medium, demibold, bold, and black
+		:pixelsize 16
+;; Specifies the font size in pixels. This can be used instead of the point size specified after the family name
+;;		:height normal
+;;		:height 143
+;;		:height normal
+;;;		:width normal
+		:foundry "outline" 
+		:antialias natural
+;;		:family "Courier New"))
+;;        :family "微软雅黑"))
+;;		:family "Lucida Bright"))
+;;		:family "Lucida Console"))
+;;		:family "Yahei Mono"))
+;;		:family "YaHei Consolas Hybrid"))
+;;		:family "楷体"))
+		))
+     )
+  )
+)
+; here are 20 hanzi and 40 english chars, see if they are the same width
+; 你你你你你你你你你你你你你你你你你你你你
+; aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+; /aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/
+
+ ;;-------------------------Shell 使用 ansi color-------------
+ (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+ (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
