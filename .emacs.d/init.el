@@ -84,9 +84,9 @@
 
 ;; ==================================================
 ;; 利用Emacs 24中的package功能从网上的包库中查找各种包
-(setq package-archives '(("ELPA" . "http://tromey.com/elpa/") 
-                        ;; ("gnu" . "http://elpa.gnu.org/packages/")
-						 ))
+(setq package-archives '(("tromey" . "http://tromey.com/elpa/")))
+(add-to-list 'package-archives
+			 '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
