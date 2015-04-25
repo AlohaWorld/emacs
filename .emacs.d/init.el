@@ -627,8 +627,15 @@ occurence of CHAR."
 
 ;; ==================================================
 ;; setup helm
-;(require 'helm-config)
-;(helm-mode 1)
+;; Helm 201411之后的版本在使用melpa安装编译时会出现错误
+;;      需要 async 支持
+;;`async.el` is a module for doing asynchronous processing in Emacs.
+(add-to-list 'load-path (concat basicPath "lisp/emacs-async") )
+(when (require 'dired-aux)
+  (require 'dired-async))
+
+(require 'helm-config)
+(helm-mode 1)
  
  ;; ========================================================
 ;; 设置emacs daemon模式（与Linux 的emacs daemon不同，需要先
