@@ -24,3 +24,20 @@
 ;;  (setq default-process-coding-system 
 ;;              '(chinese-iso-8bit-dos))
 ;;              ;;euc-cn . euc-cn))
+
+;;=====================================================================
+;; Chinese-pyim
+;; https://github.com/tumashu/chinese-pyim
+;(setq pyimBigdict (concat pyimDictPath "pyim-bigdict.txt"))
+;(setq pyim-dicts 
+;	  `((:name "bigdict" :file ,pyimBigdict :coding utf-8-unix)))
+;;    '((:name "bigdict" :file "/path/to/bigdict" :coding utf-8-unix)))
+;;      (:name "dict2" :file "/path/to/pyim-dict2.txt" :coding gbk-dos))) 
+
+
+;; ## 激活 Chinese-pyim ## 
+(require 'chinese-pyim) 
+;(setq default-input-method "chinese-pyim") 
+;(global-set-key (kbd "C-<SPC>") 'toggle-input-method) 
+;(global-set-key (kbd ";") 'pyim-insert-ascii) 
+

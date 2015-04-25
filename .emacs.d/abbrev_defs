@@ -1,6 +1,8 @@
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'Buffer-menu-mode-abbrev-table '())
 
+(define-abbrev-table 'Info-edit-mode-abbrev-table '())
+
 (define-abbrev-table 'bibtex-mode-abbrev-table '())
 
 (define-abbrev-table 'calendar-mode-abbrev-table '())
@@ -14,6 +16,8 @@
 (define-abbrev-table 'diary-mode-abbrev-table '())
 
 (define-abbrev-table 'display-time-world-mode-abbrev-table '())
+
+(define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
 
 (define-abbrev-table 'emacs-lisp-byte-code-mode-abbrev-table '())
 
@@ -31,7 +35,7 @@
 
 (define-abbrev-table 'literate-haskell-mode-abbrev-table '())
 
-(define-abbrev-table 'message-mode-abbrev-table '())
+(define-abbrev-table 'messages-buffer-mode-abbrev-table '())
 
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
@@ -60,7 +64,9 @@
 
 (define-abbrev-table 'prog-mode-abbrev-table '())
 
-(define-abbrev-table 'python-mode-abbrev-table '())
+(define-abbrev-table 'pyim-dicts-manager-mode-abbrev-table '())
+
+(define-abbrev-table 'select-tags-table-mode-abbrev-table '())
 
 (define-abbrev-table 'shell-mode-abbrev-table '())
 
@@ -75,4 +81,8 @@
 (define-abbrev-table 'thumbs-mode-abbrev-table '())
 
 (define-abbrev-table 'thumbs-view-image-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
 

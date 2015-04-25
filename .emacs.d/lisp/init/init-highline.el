@@ -22,11 +22,18 @@
 (add-hook 'dired-after-readin-hook #'highline-mode-on)
 ;; Turn on local highlighting for org-agenda view (C-c aa)
 (add-hook 'org-agenda-post-command-hook #'highline-mode-on)
+
+;; Turn on local highlighting for ibuffer (C-x C-b)
+(defadvice ibuffer (after highlight-line activate)
+  (with-current-buffer
+	  "*Ibuffer*"
+	(highline-mode-on)))
+
 ;; Turn on local highlighting for list-buffers (C-x C-b)
-(defadvice list-buffers (after highlight-line activate)
-  (save-excursion
-    (set-buffer "*Buffer List*")
-    (highline-mode-on)))
+;;(defadvice list-buffers (after highlight-line activate)
+;;  (with-current-buffer
+;;	  "*Buffer List*"
+;;	(highline-mode-on)))
 
 ;;设置高亮行的背景颜色
 ;; 参见 ~/emacs/lisp/emacs_face.el

@@ -2,9 +2,15 @@
 ;; Filename: init.el
 ;; Emacs initialization file
 ;; Cui Yidong
-;; Rev 20140503
+;; Rev 20150425
 ;; ==================================================
 
+;; ==================================================
+;; ChangeLog
+;; 20150425 Upgrade to emacs 24.4
+;;          Set privilige of emacs.exe
+;;          Move org/contrib to ~/.emacs.d/
+;;          add load-path or org/contrib/lisp
 
 ;; ==================================================
 ;; 为Windows下的emacs增加加载路径
@@ -27,7 +33,10 @@
 (add-to-list 'load-path (concat basicPath "lisp") )
 (add-to-list 'load-path (concat basicPath "lisp/mylib") )
 (add-to-list 'load-path (concat basicPath "lisp/haskell-additional"))
-(add-to-list 'load-path (concat basicPath "lisp/emacs-w3m") )
+
+;; In emacs 24.4, we use eww instead of w3m
+;;(add-to-list 'load-path (concat basicPath "lisp/emacs-w3m") )
+
 (add-to-list 'load-path (concat basicPath "elpa/highline-7.2.2") )
 (add-to-list 'load-path (concat basicPath "lisp/python") )
 
@@ -37,25 +46,29 @@
 
 ;; lisp/init 目录存放各种功能的初始化代码
 (add-to-list 'load-path (concat basicPath "lisp/init"))
-(add-to-list 'load-path "~/.emacs.d")
+;;(add-to-list 'load-path "~/.emacs.d")
 
 
 ;;------------------------------------------------
 ;; 以下是关于org模式初始化的相关路径。具体使用请参见 lisp/init/init-org.el
+
+;; 将 org 的 contrib 子目录加入到 emacs path 中
+;; org 目录中有个 contrib 子目录，其中包含额外的org功能文件
+;;   org-checklist.el 就在该目录中
+(add-to-list 'load-path (concat basicPath "lisp/org/contrib/lisp") )
 
 ;; org-mode 8.0的内容已经被整合到emacs主目陆了,所以下面的elpa下载的包就不用了
 ;(add-to-list 'load-path (concat basicPath "elpa/org-20130603") )
 
 (defvar orgPath "D:/MyDocument/99.Org/"
   "所有org文件所在的基础路径" )
+
 ;; dropbox 是用来做pc与手机端的 mobile org mode 内容同步的
 (defvar dropboxPath "D:/MyDocument/95.Dropbox/Dropbox/")
 
-;; 将 org 的 contrib 子目录加入到 emacs path 中
-;; org 目录中有个 contrib 子目录，其中包含额外的org功能文件
-;;   org-checklist.el 就在该目录中
-(defvar orgContribPath "C:/home/bin/Emacs/lisp/org/contrib/lisp/")
-(add-to-list 'load-path orgContribPath)
+;; Chinese-pyim 词库所在位置
+;; 在init-coding-system.el中使用
+(defvar pyimDictPath (concat basicPath "pyim/"))
 
 ;;; This was installed by package-install.el.
 ;;; This provides support for the package system and
@@ -515,7 +528,7 @@ occurence of CHAR."
 ;; ==================================================
 ;;设置缺省模式是text，而不是基本模式 
 (setq default-major-mode 'text-mode) 
-(add-hook 'text-mode-hook 'turn-on-auto-fill) 
+
 
 ;; ==================================================
 ;;设置tab为4个空格的宽度，而不是原来的2 
@@ -585,22 +598,23 @@ occurence of CHAR."
 (add-hook 'after-init-hook 'org-agenda-list)
 
 ;; ==================================================
+;; obsoleted, for in emacs 24.4 we use eww instead of w3m
 ;;w3m 
 ;;(setq w3m-command "~/")
-(require 'w3m)
+;(require 'w3m)
 ;;;设置w3m为emacs的默认浏览器
-(setq browse-url-browser-function 'w3m-browse-url)
-(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+;(setq browse-url-browser-function 'w3m-browse-url)
+;(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 ;;(autoload 'w3m-toggle-inline-images "w3m" "set to display images." t)
-(global-set-key "\C-xm" 'w3m-goto-url-new-session)
+;(global-set-key "\C-xm" 'w3m-goto-url-new-session)
 
-(require 'w3m-load)
-(setq w3m-use-favicon nil) 
-(setq w3m-command-arguments '("-cookie" "-F")) 
-(setq w3m-use-cookies t) 
+;(require 'w3m-load)
+;(setq w3m-use-favicon nil) 
+;(setq w3m-command-arguments '("-cookie" "-F")) 
+;(setq w3m-use-cookies t) 
 ;;(require 'mime-w3m)
 ;;(setq w3m-default-toggle-inline-images t)
-(setq w3m-default-display-inline-images t)
+;(setq w3m-default-display-inline-images t)
 
 ;; ==================================================
 ;; highline 模式设置：将当前行加亮；应放到最后
@@ -613,8 +627,8 @@ occurence of CHAR."
 
 ;; ==================================================
 ;; setup helm
-(require 'helm-config)
-(helm-mode 1)
+;(require 'helm-config)
+;(helm-mode 1)
  
  ;; ========================================================
 ;; 设置emacs daemon模式（与Linux 的emacs daemon不同，需要先
@@ -646,4 +660,3 @@ occurence of CHAR."
 (setq server-auth-dir basicPath)
 (setq server-name "emacs-server-file")
 (server-start)
-
