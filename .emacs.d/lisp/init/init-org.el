@@ -1370,7 +1370,7 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
 
 (define-skeleton skel-org-block-plantuml-activity-for
   "Insert a org plantuml block activity for statement"
-v  "" 
+  "" 
   "--> ==LOOP1==\n"
   "note left: Loop1: For each\n"
   "--> ==ENDLOOP1==\n"
