@@ -1022,7 +1022,9 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
          (ruby . t)
          (gnuplot . t)
          (clojure . t)
-         (sh . t)
+; 在org-mode 8.3中，将ob-sh改名为ob-shell了。
+; 所以这里不能用(sh . t)，而要改为：
+		 (shell . t)
          (ledger . t)
          (org . t)
          (plantuml . t)
