@@ -278,7 +278,12 @@
   (interactive)
   (save-excursion
     (beginning-of-line 0)
-    (org-remove-empty-drawer-at "LOGBOOK" (point))))
+	;; cyd@20160223
+    ;; In order to solve the misbehaving issue (gibberish) of
+	;; org-capture and time clocking, we modify the following
+	;; line according to http://stackoverflow.com/questions/21767471
+;;    (org-remove-empty-drawer-at "LOGBOOK" (point))))
+	(org-remove-empty-drawer-at (point))))
 
 (add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
 
