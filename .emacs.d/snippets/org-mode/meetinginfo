@@ -1,14 +1,13 @@
 # -*- mode: snippet -*-
 # name: meetinginfo
-# key: meetinginfo
+# key: meeting
 # binding: direct-keybinding
 # expand-env: ((some-var some-value))
 # type: command
 # --
-| 会议日期 |			 |
-| 会议时间 |  			 |
+| 会议时间 | `(current-time-string)` |
 | 会议地点 |             |
 | 类型     |             |
 | 主持人   |             |
-| 记录者   |             |
+| 记录者   | 崔毅东 |
 | 与会者   |             |
