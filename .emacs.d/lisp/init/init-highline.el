@@ -42,3 +42,9 @@
 (global-set-key "\C-c\C-g" 'highline-mode)
 ;; moved to .emacs
 ;;(highline-mode 1)
+
+
+;; highlights the previously visible buffer part after each scroll.
+(require 'on-screen)
+;; To invoke on-screen globally for all buffers, also add
+(on-screen-global-mode +1)
