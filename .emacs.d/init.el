@@ -454,8 +454,8 @@
 (load "init-org")
 
 ;; Emacs启动之后，首先显示日程列表
-										;(add-hook 'window-setup-hook 'split-window-horizontally)
-										;(add-hook 'window-setup-hook 'org-agenda-list)
+;(add-hook 'window-setup-hook 'split-window-horizontally)
+;(add-hook 'window-setup-hook 'org-agenda-list)
 ;(add-hook 'after-init-hook 'split-window-horizontally)
 (add-hook 'after-init-hook
 		  (lambda ()

@@ -1,24 +1,82 @@
 ;;==============================================================================
 ;; In this init file, The attributes of fonts/colors are set
 
+;; ==================================================
+;; 设置emacs窗口的颜色方案COLOR-THEME
+; (require 'color-theme)
+; (eval-after-load "color-theme"
+;   '(progn
+;      (color-theme-initialize)
+; ;;(color-theme-comidia)
+; ;; (color-theme-hober)
+; ;;(color-theme-clarity)
+; ;; (color-theme-charcoal-black)
+; (color-theme-ld-dark)
+; 
+; )) ;; end (progn
+
+;; Modified by cyd@20160226 to add theme cycle (F4 key)
+;; http://orgmode.org/worg/org-color-themes.html
+(require 'color-theme)
+(setq color-theme-is-global t)
+(color-theme-initialize)
+
+(load "color-theme-colorful-obsolescence")
+(load "color-theme-tangotango")
+;(load "color-theme-folio")
+;(load "color-theme-zenash")
+;(load "color-theme-manoj")
+
+(setq my-color-themes (list
+					   'color-theme-colorful-obsolescence
+					   'color-theme-tangotango
+					   'color-theme-folio
+					   'color-theme-zenash
+					   'color-theme-manoj-dark
+					   'color-theme-comidia
+					   'color-theme-hober
+					   'color-theme-clarity
+					   'color-theme-charcoal-black
+					   ))
+
+(defun my-theme-set-default () ; Set the first row
+  (interactive)
+  (setq theme-current my-color-themes)
+  (funcall (car theme-current)))
+
+(defun my-describe-theme () ; Show the current theme
+  (interactive)
+  (message "%s" (car theme-current)))
+
+; Set the next theme (fixed by Chris Webber - tanks)
+(defun my-theme-cycle ()            
+  (interactive)
+  (setq theme-current (cdr theme-current))
+  (if (null theme-current)
+      (setq theme-current my-color-themes))
+  (funcall (car theme-current))
+  (message "%S" (car theme-current)))
+
+(setq theme-current my-color-themes)
+(setq color-theme-is-global nil) ; Initialization
+(my-theme-set-default)
+(global-set-key [f4] 'my-theme-cycle)
+
+
 ;; 高亮行的背景
 ;; '(highline-face ((t (:background "#006600"))))
 '(highline-face ((t (:background "blue"))))
 '(org-mode-line-clock ((t (:background "grey75" :foreground "red" :box (:line-width -1 :style released-button)))) t)
 
-;; ==================================================
-;; 设置emacs窗口的颜色方案COLOR-THEME
-(require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-;;(color-theme-comidia)
-;; (color-theme-hober)
-;;(color-theme-clarity)
-;; (color-theme-charcoal-black)
-(color-theme-ld-dark)
+;; customize the "delimiter lines" of the code blocks in Org files
+;; --> http://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
+'(org-block-begin-line
+  ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF"))))
+'(org-block-background
+  ((t (:background "#FFFFEA"))))
+'(org-block-end-line
+  ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF"))))
 
-)) ;; end (progn
 
 
 ;; 设置指针颜色

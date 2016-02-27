@@ -23,6 +23,12 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 
 
+;; ======= My extra setup ======================================================
+;; fontify code in code blocks
+;; where there is a #+begin_src xxx
+(setq org-src-fontify-natively t)
+
+
 ;; ======= 4.4 Agenda Setup ====================================================
 ;; 设置变量org-agenda-files，以便让Org-Mode知道在哪些文
 ;; 件里搜寻TODO和计划项目 
