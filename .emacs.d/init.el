@@ -22,7 +22,9 @@
 ;      (if (eq system-type 'windows-nt)
 ;          '("windows-path/file.org")
 ;        '("unix-path/file.org")))
-(defvar basicPath "D:/MyDocument/60.Applications/emacs/.emacs.d/"
+
+(defvar myDocument "D:/MyDocument/")
+(defvar basicPath (concat myDocument "60.Applications/emacs/.emacs.d/")
 	"所有emacs自定义目录所在的基础路径" )
 
 (if (eq system-type 'windows-nt)
@@ -64,6 +66,18 @@
 
 ;; dropbox 是用来做pc与手机端的 mobile org mode 内容同步的
 (defvar dropboxPath "D:/MyDocument/95.Dropbox/Dropbox/")
+
+
+;; ===================================================================
+;; Check the paths in load-path exist or not
+;;  if not exists then prompt errors to user
+(dolist (pathx load-path)
+  (if (equal nil (file-directory-p pathx))
+	  (message (concat "ERROR dir does not exist in load-path: " pathx))
+	)
+  )
+
+
 
 ;; ===================================================================
 ;; Chinese-pyim 词库所在位置
@@ -385,12 +399,12 @@
 ;; ===================================================================
 ;; 启用ido模式，把备选项直接列出来，你可以输入几个字来缩小
 ;; 备选范围，也可以用其它键来导航、选择 
-(ido-mode 1)
-(setq ido-enable-flex-matching t)    ;模糊匹配
+;(ido-mode 1)
+;(setq ido-enable-flex-matching t)    ;模糊匹配
 ;; (setq ido-everywhere nil)         ;禁用ido everyting, 拷贝操作不方便
-(setq ido-everywhere t)
-(setq ido-max-directory-size 100000)
-(ido-mode (quote both))
+;(setq ido-everywhere t)
+;(setq ido-max-directory-size 100000)
+;(ido-mode (quote both))
 
 ;; ===================================================================
 ;; 启用 company 模式
@@ -531,3 +545,7 @@
 ;; highline 模式设置：将当前行加亮；应放到最后
 (load "init-highline")
 (highline-mode 1)
+
+;; ==================================================
+;; Set the default dir when using C-c C-f to open files
+(setq default-directory myDocument)

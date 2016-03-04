@@ -1,15 +1,15 @@
-;;; helm-orgcard.el --- browse the orgcard by helm
+;;; helm-orgcard.el --- browse the orgcard by helm -*- lexical-binding: t -*-
 
 ;; Description: browse the orgcard by helm.
 ;; Author: Yuhei Maeda <yuhei.maeda_at_gmail.com>
 ;; Maintainer: Yuhei Maeda
-;; Copyright (C) 2013 Yuhei Maeda all rights reserved.
+;; Copyright (C) 2015 Yuhei Maeda all rights reserved.
 ;; Created: :2013-06-05
-;; Version: 20130608.430
-;; X-Original-Version: 0.1
+;; Version: 0.2
+;; Package-Version: 20151001.824
 ;; Keywords: convenience, helm, org
-;; URL: https://github.com/emacs-helm/helm-orgcard
-;; Package-Requires: ((helm "1.5.2"))
+;; URL: https://github.com/emacs-jp/helm-orgcard
+;; Package-Requires: ((helm-core "1.7.7"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -28,26 +28,34 @@
 
 ;; Put the helm-orgcard.el to your
 ;; load-path.
-;; Add to .emacs:
+;; Add to init.el:
 ;; (require 'helm-orgcard)
 ;;
 ;; Original version is anything-orgcard, and port to helm.
 ;; https://gist.github.com/kiwanami/1345100
-;; 
+;;
 
 
 ;;; Code:
 
 (require 'helm)
 
-(defvar hoc-lang-selector 'en
-  "Select orgcard langage. English or Japanese.")
+(defgroup helm-orgcard nil
+  "Browse the orgcard by helm"
+  :group 'org)
 
-(defvar hoc-orgcard-url '((en  "http://orgmode.org/orgcard.txt")  
+(defcustom hoc-lang-selector 'en
+  "Select orgcard language. English or Japanese."
+  :type '(choice
+          (const :tag "English" en)
+          (const :tag "Japanese" ja))
+  :group 'helm-orgcard)
+
+(defvar hoc-orgcard-url '((en  "http://orgmode.org/orgcard.txt")
                            (ja  "http://orgmode.jp/orgcard-ja.txt"))
   "URL to the orgcard.")
 
-(defvar hoc-orgcard-file '((en  "~/.emacs.d/orgcard.txt")  
+(defvar hoc-orgcard-file '((en  "~/.emacs.d/orgcard.txt")
                            (ja  "~/.emacs.d/orgcard.ja.txt"))
   "Path to the orgcard.")
 
@@ -60,7 +68,7 @@ function retrieves from the URL."
   (unless (file-exists-p file)
     (let ((buf (url-retrieve-synchronously url)))
       (when buf
-        (with-current-buffer buf 
+        (with-current-buffer buf
           (write-file file))
         (kill-buffer buf))))
   (unless (file-exists-p file)
@@ -74,9 +82,9 @@ function retrieves from the URL."
 
 (defun hoc-create-sources ()
   "[internal] create an helm source for orgcard."
-  (let (heads 
-        cur-title 
-        cur-subtitle 
+  (let (heads
+        cur-title
+        cur-subtitle
         cur-records
         (file (expand-file-name
                (cadr (assoc hoc-lang-selector hoc-orgcard-file)))))
@@ -84,16 +92,16 @@ function retrieves from the URL."
       (insert-file-contents file)
       (goto-char (point-min))
       (forward-line 4) ; skip title
-      (while 
+      (while
           (let ((line (hoc-readline)))
             (cond
              ((equal "" line) nil)     ; do nothing
              ((equal ?= (aref line 0)) ; header
               (when cur-title          ; flush records
-                (push 
+                (push
                  `((name . ,cur-title)
                    (candidates ,@cur-records)
-                   (action 
+                   (action
                     . (("Echo" . hoc-echo-action))))
                  heads))
               (forward-line 1)
@@ -109,7 +117,7 @@ function retrieves from the URL."
             (forward-line 1)
             (not (eobp)))))
     (when cur-title ; flush the last records
-      (push 
+      (push
        `((name . ,cur-title)
          (candidates ,cur-records)
          (action . (("Echo" . hoc-echo-action))))
