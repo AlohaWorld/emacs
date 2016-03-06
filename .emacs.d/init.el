@@ -412,16 +412,7 @@
 
 ;; ===================================================================
 ;; setup helm
-;; Helm 201411之后的版本在使用melpa安装编译时会出现错误
-;;      需要 async 支持
-;;`async.el` is a module for doing asynchronous processing in Emacs.
-(add-to-list 'load-path (concat basicPath "lisp/emacs-async") )
-(when (require 'dired-aux)
-  (require 'dired-async))
-
-(require 'helm-config)
-(helm-mode 1)
-
+(load "init-helm")
 
 ;; BELOW is from http://doc.norang.ca/org-mode.html
 ;;   18.35 Use Smex For M-X Ido-Completion

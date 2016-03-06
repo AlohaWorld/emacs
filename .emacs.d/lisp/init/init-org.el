@@ -329,15 +329,15 @@
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
 
 ; Use IDO for both buffer and file completion and ido-everywhere to t
-(setq org-completion-use-ido t)
+; (setq org-completion-use-ido t)
 
 ;;;; Below added on 2013/07/13
-(setq ido-everywhere t)
-(setq ido-max-directory-size 100000)
-(ido-mode (quote both))
+;(setq ido-everywhere t)
+;(setq ido-max-directory-size 100000)
+;(ido-mode (quote both))
 ; Use the current window when visiting files and buffers with ido
-(setq ido-default-file-method 'selected-window)
-(setq ido-default-buffer-method 'selected-window)
+;(setq ido-default-file-method 'selected-window)
+;(setq ido-default-buffer-method 'selected-window)
 ;;;; 2013/07/13 over
 
 ;;;; Refile settings
