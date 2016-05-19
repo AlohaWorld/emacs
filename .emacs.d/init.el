@@ -49,7 +49,6 @@
 (add-to-list 'load-path (concat basicPath "lisp/init"))
 ;;(add-to-list 'load-path "~/.emacs.d")
 
-
 ;; ===================================================================
 ;; 以下是关于org模式初始化的相关路径。具体使用请参见 lisp/init/init-org.el
 
@@ -116,6 +115,14 @@
 			 '("org" . "http://orgmode.org/elpa/") t)
 
 
+;; 必须在包管理功能加载后，才能load cygwin path			 
+;; Load cygwin path (need cygwin-mount package)
+(setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
+(setq exec-path (cons "c:/cygwin/bin/" exec-path))
+(require 'cygwin-mount)
+(cygwin-mount-activate)
+			 
+			 
 ;; ===================================================================
 ;; 设置个人信息
 (setq user-full-name "Cui Yidong")
@@ -170,8 +177,19 @@
 ;; - 设置shell的颜色
 
 (load "init-color-face.el")
+;; Change the default shell from cmd.exe to cygwin
 ;; (setq shell-file-name "C:/cygwin/bin/zsh.exe")
 ;; "C:/cygwin/bin/zsh.exe")
+(setq explicit-shell-file-name "C:/cygwin/bin/zsh.exe")
+(setq shell-file-name "zsh")
+;; (setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
+(setenv "SHELL" shell-file-name)
+;; remove the input Ctrl-M character
+(add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
+(add-to-list 'process-coding-system-alist
+			 '("zsh" . (undecided-dos . undecided-unix)))
+
+
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t) 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
 ;; ========================================================
