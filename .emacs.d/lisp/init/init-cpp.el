@@ -15,3 +15,8 @@
   (c-toggle-auto-hungry-state 0))
 
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
+
+;; Add cmake-ide to enhance c/c++ programming
+
+(require 'rtags) ;; optional, must have rtags installed
+(cmake-ide-setup)
