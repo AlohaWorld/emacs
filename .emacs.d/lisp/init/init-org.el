@@ -969,7 +969,7 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
 ;; Setup Archive
 ;; Tasks can just archive normally to the Archived Tasks heading in the archive file
 (setq org-archive-mark-done nil)
-(setq org-archive-location "%s_archive::* Archived Tasks")
+(setq org-archive-location "Archive/%s.archive::* Archived Tasks")
 
 (defun bh/skip-non-archivable-tasks ()
   "Skip trees that are not available for archiving"

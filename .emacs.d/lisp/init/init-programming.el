@@ -29,6 +29,7 @@
 )
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
+(load "init-cpp")
 ;; ==================================================
 ;; Haskell
 ;;(require 'init-haskell)

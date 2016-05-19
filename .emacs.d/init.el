@@ -433,6 +433,7 @@
 ;;查看所需库文件的指令是 M-: image-library-alist RET
 (require 'thumbs) 
 (auto-image-file-mode t)
+(image-type-available-p 'png)
    										 
 ;; ==================================================
 ;; 去掉每次启动emacs出来的无用的“信息”
@@ -540,3 +541,13 @@
 ;; ==================================================
 ;; Set the default dir when using C-c C-f to open files
 (setq default-directory myDocument)
+
+;; ==================================================
+;; Display an analog clock on screen
+;; ~/lisp/mylib/analog-clock.el
+(require 'analog-clock)
+; Choose if you want a clock with hands, or a
+; seven-segment-display by setting `analog-clock-draw-function' to
+; `analog-clock-draw-analog' or `analog-clock-draw-ssd'. 
+(setq analog-clock-draw-function #'analog-clock-draw-analog)
+
