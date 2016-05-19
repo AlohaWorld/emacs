@@ -4,6 +4,7 @@ dot.emacs.reference
 *~
 *.orig
 *.elc
+*.signed
 /.emacs.d/.org-id-locations
 /.emacs.d/bookmarks
 /.emacs.d/history
