@@ -2,7 +2,7 @@
 ;; Filename: init.el
 ;; Emacs initialization file
 ;; Cui Yidong
-;; Rev 20150425
+;; Rev 20160521
 ;; ==================================================
 
 ;; ==================================================
@@ -13,6 +13,9 @@
 ;;          add load-path or org/contrib/lisp
 ;; 20150426 Move scripts related with EDIT & SEARCH
 ;;          to "lisp/init/init-edit.el"
+;; 20160521 Tune load-path
+;;          Add C/C++ IDE support (cmake)
+;;          Tune yasnippet
 ;; ==================================================
 ;; 为Windows下的emacs增加加载路径
 ;; setq 序列 (concat 序列 " " (int-to-string 变))
@@ -31,34 +34,21 @@
 	(defvar cygwin-root-path "c:/cygwin/"
 	  "cygwin的根目录" ))
 
-(add-to-list 'load-path (concat basicPath "lisp") )
-(add-to-list 'load-path (concat basicPath "lisp/mylib") )
-(add-to-list 'load-path (concat basicPath "lisp/haskell-additional"))
+;; Add some subdirs under ~/.emacs.d/lisp/ to load-path
+(let ((default-directory  (concat basicPath "lisp")))
+  (normal-top-level-add-to-load-path '("init"     ;; init scripts
+									   "mylib"
+									   "haskell-additional"
+									   "python"
+									   "theme"    ;; used in init-color-face.el
+;; org 目录中有个 contrib 子目录，其中包含额外的org功能文件,org-checklist.el 就在该目录中
+									   "org/contrib/lisp" ;; additional org-mode support
+									   )))
 
-;; In emacs 24.4, we use eww instead of w3m
-;;(add-to-list 'load-path (concat basicPath "lisp/emacs-w3m") )
+;; ==================================================
+;; Set the default dir when using C-c C-f to open files
+(setq default-directory myDocument)
 
-(add-to-list 'load-path (concat basicPath "elpa/highline-7.2.2") )
-(add-to-list 'load-path (concat basicPath "lisp/python") )
-
-;; 以下在lisp/init/init-color-face.el中使用
-;; 凡是字体和色彩的配置，都参见 init-color-face.el
-(add-to-list 'load-path (concat basicPath "lisp/theme") )
-
-;; lisp/init 目录存放各种功能的初始化代码
-(add-to-list 'load-path (concat basicPath "lisp/init"))
-;;(add-to-list 'load-path "~/.emacs.d")
-
-;; ===================================================================
-;; 以下是关于org模式初始化的相关路径。具体使用请参见 lisp/init/init-org.el
-
-;; 将 org 的 contrib 子目录加入到 emacs path 中
-;; org 目录中有个 contrib 子目录，其中包含额外的org功能文件
-;;   org-checklist.el 就在该目录中
-(add-to-list 'load-path (concat basicPath "lisp/org/contrib/lisp") )
-
-;; org-mode 8.0的内容已经被整合到emacs主目陆了,所以下面的elpa下载的包就不用了
-;(add-to-list 'load-path (concat basicPath "elpa/org-20130603") )
 
 (defvar orgPath "D:/MyDocument/99.Org/"
   "所有org文件所在的基础路径" )
@@ -122,7 +112,6 @@
 (require 'cygwin-mount)
 (cygwin-mount-activate)
 			 
-			 
 ;; ===================================================================
 ;; 设置个人信息
 (setq user-full-name "Cui Yidong")
@@ -147,7 +136,7 @@
 ;; ========================================================
 ;; 设置emacs启动窗口大小
 (setq default-frame-alist
- '((height . 25) (width , 50) (menu-bar-lines . 20) (tool-bar-lines . 0)))
+ '((height . 21) (width , 50) (menu-bar-lines . 20) (tool-bar-lines . 0)))
 
 ;; ==================================================
 ;; 设置全屏(fullscreen) ，仅限在Windows操作系统中使用
@@ -159,7 +148,7 @@
 ;  )
 ;; Emacs 24.4 fully supports fullscreen on Windows.
 ;; Use M-x toggle-frame-fullscreen to toggle it.
-(global-set-key [(control f12)] 'toggle-frame-screen)
+(global-set-key [(control f12)] 'toggle-frame-fullscreen)
 
 
 ;; ==================================================
@@ -177,6 +166,9 @@
 ;; - 设置shell的颜色
 
 (load "init-color-face.el")
+
+
+;; ==================================================
 ;; Change the default shell from cmd.exe to cygwin
 ;; (setq shell-file-name "C:/cygwin/bin/zsh.exe")
 ;; "C:/cygwin/bin/zsh.exe")
@@ -386,14 +378,14 @@
 (load "init-coding-system")
 
 ;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;;++各种程序设计语言模式初始化++++++++++++++++++++++++++++++++++++++++++
-;; 参见 basicPath/lisp/init/init-programming.el
-(load "init-programming")
+;; ========= Auto Complete 初始化 ==========================
+(require 'init-auto-complete)
 
 
 ;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; ========= Auto Complete 初始化 ==========================
-(require 'init-auto-complete)
+;;++各种程序设计语言模式初始化++++++++++++++++++++++++++++++++++++++++++
+;; 参见 basicPath/lisp/init/init-programming.el
+(load "init-programming")
 
 
 ;; ++ 其他 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -555,10 +547,6 @@
 ;; highline 模式设置：将当前行加亮；应放到最后
 (load "init-highline")
 (highline-mode 1)
-
-;; ==================================================
-;; Set the default dir when using C-c C-f to open files
-(setq default-directory myDocument)
 
 ;; ==================================================
 ;; Display an analog clock on screen

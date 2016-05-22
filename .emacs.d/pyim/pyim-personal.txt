@@ -1,4 +1,8 @@
 ;; -*- coding: utf-8 -*-
+b-t 不同
+b-t-d-zh-d-j 不同的战斗机
+bu-tong 不同
+bu-tong-de-zhan-dou-ji 不同的战斗机
 c-sh 测试
 c-z 操作
 cao-zuo 操作
@@ -32,16 +36,22 @@ x-sh 显示
 xia-mian 下面
 xian-shi 显示
 xu-qiu 需求
+y-g 一个
 y-x 一下
+yi-ge 一个
 yi-xia 一下
 z-m-y 怎么样
 zai 在
 zen-me-yang 怎么样
+zh-d-j 战斗机
 zh-g 这个
 zh-j 直接
+zh-j-sh 这就是
 zh-w 中文
 zh-w-z-m-y 中文怎么样
+zhan-dou-ji 战斗机
 zhe-ge 这个
+zhe-jiu-shi 这就是
 zhi-jie 直接
 zhong-wen 中文
 zhong-wen-zen-me-yang 中文怎么样

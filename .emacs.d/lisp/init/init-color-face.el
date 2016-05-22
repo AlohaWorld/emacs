@@ -23,20 +23,22 @@
 
 (load "color-theme-colorful-obsolescence")
 (load "color-theme-tangotango")
-;(load "color-theme-folio")
-;(load "color-theme-zenash")
-;(load "color-theme-manoj")
+;; (load "color-theme-folio")
+;; (load "color-theme-zenash")
+;; (load "color-theme-manoj")
 
 (setq my-color-themes (list
 					   'color-theme-colorful-obsolescence
 					   'color-theme-tangotango
-					   'color-theme-folio
-					   'color-theme-zenash
-					   'color-theme-manoj-dark
+;;					   'color-theme-folio
+;;					   'color-theme-zenash
+;;					   'color-theme-manoj-dark
 					   'color-theme-comidia
 					   'color-theme-hober
 					   'color-theme-clarity
 					   'color-theme-charcoal-black
+					   'color-theme-xp
+					   'color-theme-wheat
 					   ))
 
 (defun my-theme-set-default () ; Set the first row

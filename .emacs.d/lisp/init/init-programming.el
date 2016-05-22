@@ -45,34 +45,6 @@
 (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
 (add-hook 'haskell-mod-hook 'hs-minor-mode)
 
-;; ==================================================================
-;; Yasnippet
-;; Basic steps to setup:
-;;   1. In your .emacs file:
-;;        (add-to-list 'load-path "/dir/to/yasnippet.el")
-;; done in .emacs
-;(require 'yasnippet)
-;;   2. Place the `snippets' directory somewhere.  E.g: ~/.emacs.d/snippets
-;;   3. In your .emacs file
-;(setq yas/root-directory (concat basicPath "snippets") )
-;(yas/load-directory yas/root-directory)
-;;   4. To enable the YASnippet menu and tab-trigger expansion
-;;        M-x yas/minor-mode
-;;   5. To globally enable the minor mode in *all* buffers
-;;        M-x yas/global-mode
-;;
-;;   Steps 4. and 5. are optional, you don't have to use the minor
-;;   mode to use YASnippet.
-(require 'yasnippet)
-;(yas/initialize)
-(setq yas/snippet-dirs (concat basicPath "snippets") )
-(yas/load-directory yas/snippet-dirs)
-(yas/global-mode 1)
-
-(require 'dropdown-list) ;; 需要从elpa单独安装
-(setq yas/prompt-functions '(yas/dropdown-prompt
-							 yas/ido-prompt
-							 yas/completing-prompt))
 
 ;; ==================================================
 ;; Python

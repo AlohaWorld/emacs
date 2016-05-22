@@ -20,3 +20,29 @@
 
 (require 'rtags) ;; optional, must have rtags installed
 (cmake-ide-setup)
+
+;; The C compiler flags to use.  Should have -I flags for system includes.
+(setq cmake-ide-flags-c '("-I/usr/include"))
+;;(setq cmake-ide-flags-c  '("-I/C:/cygwin/usr/include"))
+
+;; The C++ compiler flags to use.  Should have -I flags for system includes.
+;;   For a system with gcc, you can get this information by running
+;;   gcc -v -xc++ /dev/null -fsyntax-only
+
+(setq cmake-ide-flags-c++ '("-I/usr/include"
+							"/lib/gcc/i686-pc-cygwin/5.3.0/include/c++"
+							"/usr/lib/gcc/i686-pc-cygwin/5.3.0/include/c++/i686-pc-cygwin"
+							"/usr/lib/gcc/i686-pc-cygwin/5.3.0/include/c++/backward"
+							"/usr/lib/gcc/i686-pc-cygwin/5.3.0/include"
+							"/usr/local/include"
+							"/usr/lib/gcc/i686-pc-cygwin/5.3.0/../../../../include/w32api"
+							))
+
+;; The build directory to run CMake in.  If nil, runs in a temp dir.  DEPRECATED, use cmake-ide-build-dir instead.
+(setq cmake-ide-dir nil)
+
+;; The build directory to run CMake in.  If nil, runs in a temp dir.
+(setq cmake-ide-build-dir nil)
+
+;; The command to use to compile the project.  Can also include running tests.")
+(setq cmake-ide-compile-command "gcc")
