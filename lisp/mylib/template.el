@@ -547,10 +547,10 @@ templates, i\.e\., just searches in `template-default-directories'."
   (and (boundp 'load-file-name) load-file-name))
 
 (defcustom template-default-directories
-  (cons (if (and (not (file-directory-p "~/.templates/"))
+  (cons (if (and (not (file-directory-p "~/.emacs.d/templates/"))
 		 (file-directory-p "~/lib/templates"))
 	    (expand-file-name "~/lib/templates/")
-	  (expand-file-name "~/.templates/"))
+	  (expand-file-name "~/.emacs.d/templates/"))
         (let ((dir (if (fboundp 'locate-data-directory) ; XEmacs
                        (locate-data-directory "template")
                      (when template-load-file-name
