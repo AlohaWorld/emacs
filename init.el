@@ -25,25 +25,24 @@
 ;      (if (eq system-type 'windows-nt)
 ;          '("windows-path/file.org")
 ;        '("unix-path/file.org")))
+
 (if (eq system-type 'windows-nt)
 	(defvar myDocument "D:/MyDocument/"))
 
 (if (eq system-type 'cygwin)
   	(defvar myDocument "/cygdrive/d/MyDocument/"))
 
-(if (eq system-type 'windows-nt)
-	(defvar basicPath (concat myDocument "60.Applications/emacs/.emacs.d/")
-	"所有emacs自定义目录所在的基础路径" )
-	(defvar basicPath "~/.emacs.d/"))
+(defvar basicPath "~/.emacs.d/")
+	"Basic path for any customized dirs in emacs" )
 
 (if (eq system-type 'windows-nt)
 	(defvar cygwin-root-path "c:/cygwin/"
-	  "cygwin的根目录" ))
+	  "root dir of cygwin" ))
 
 ;; Add some subdirs under ~/.emacs.d/lisp/ to load-path
 (let ((default-directory  (concat basicPath "lisp")))
   (normal-top-level-add-to-load-path '("init"     ;; init scripts
-				   "mylib"
+										"mylib"
 									   "haskell-additional"
 									   "python"
 									   "theme"    ;; used in init-color-face.el
@@ -55,12 +54,17 @@
 ;; Set the default dir when using C-c C-f to open files
 (setq default-directory myDocument)
 
+(if (eq system-type 'windows-nt)
+	(defvar orgPath "D:/MyDocument/99.Org/"
+		"Path for all .org files" ))
 
-(defvar orgPath "D:/MyDocument/99.Org/"
-  "所有org文件所在的基础路径" )
+(if (eq system-type 'windows-nt)
+	(defvar orgPath "D:/MyDocument/99.Org/"
+		"所有org文件所在的基础路径" ))		
 
 ;; dropbox 是用来做pc与手机端的 mobile org mode 内容同步的
-(defvar dropboxPath "D:/MyDocument/95.Dropbox/Dropbox/")
+(if (eq system-type 'windows-nt)
+	(defvar dropboxPath "D:/MyDocument/95.Dropbox/Dropbox/"))
 
 
 ;; ===================================================================
@@ -114,11 +118,13 @@
 ;; 必须在包管理功能加载后，才能load cygwin path			 
 ;; Load cygwin path (need cygwin-mount package)
 (when (eq system-type 'windows-nt)
-	 (setenv "PATH" (concat "c:/cygwin/bin;c:/cygwin/usr/bin;c:/cygwin/usr/local/bin;" (getenv "PATH")))
-	 (setq exec-path (cons "c:/cygwin/bin/" exec-path))
+	 (progn
+		(setenv "PATH" (concat "c:/cygwin/bin;c:/cygwin/usr/bin;c:/cygwin/usr/local/bin;" (getenv "PATH")))
+		(setq exec-path (cons "c:/cygwin/bin/" exec-path))
 ;;	 (require 'cygwin-mount)
 ;;	 (cygwin-mount-activate)
-	 )
+	  )
+)
 			 
 ;; ===================================================================
 ;; 设置个人信息
@@ -180,14 +186,18 @@
 ;; Change the default shell from cmd.exe to cygwin
 ;; (setq shell-file-name "C:/cygwin/bin/zsh.exe")
 ;; "C:/cygwin/bin/zsh.exe")
-(setq explicit-shell-file-name "C:/cygwin/bin/zsh.exe")
-(setq shell-file-name "zsh")
+
+(when (eq system-type 'windows-nt)
+	(progn
+		(setq explicit-shell-file-name "C:/cygwin/bin/zsh.exe")
+		(setq shell-file-name "zsh")
 ;; (setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
-(setenv "SHELL" shell-file-name)
+		(setenv "SHELL" shell-file-name)
 ;; remove the input Ctrl-M character
-(add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
-(add-to-list 'process-coding-system-alist
+		(add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
+		(add-to-list 'process-coding-system-alist
 			 '("zsh" . (undecided-dos . undecided-unix)))
+	)
 
 
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t) 
@@ -265,9 +275,9 @@
 ;; s 表示把当前的状态储存下来，然后继续旋转操作，储存下来的状态 
 ;;    可以通过M-x load-layout RET命令来恢复。  
 ;; 另外，save-layout和load-layout命令也可以单独使用。 
-(require 'rotate-window)
-(global-set-key (kbd "C-c <up>") 'rotate-window-clockwise)
-(global-set-key (kbd "C-c <down>") 'rotate-window-anticlockwise)
+;;(require 'rotate-window)
+;;(global-set-key (kbd "C-c <up>") 'rotate-window-clockwise)
+;;(global-set-key (kbd "C-c <down>") 'rotate-window-anticlockwise)
 
 
 ;; 窗口分割和旋转
