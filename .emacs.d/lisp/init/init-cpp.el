@@ -17,9 +17,29 @@
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 ;; Add cmake-ide to enhance c/c++ programming
-
 (require 'rtags) ;; optional, must have rtags installed
-(cmake-ide-setup)
+(require 'company-rtags)
+;; (cmake-ide-setup)
+
+;; Setup company-rtags
+(eval-after-load 'company
+  '(add-to-list
+    'company-backends 'company-rtags))
+
+;; Set up rtags
+(setq rtags-completions-enabled t)
+(setq rtags-autostart-diagnostics t)
+(rtags-enable-standard-keybindings c-mode-base-map "\C-xr")
+;; (rtags-enable-standard-keybindings)
+
+(setq rtags-use-helm)
+
+;; enable code completion in Emacs with company mode
+;;; (setq rtags-autostart-diagnostics t)
+;;; (setq rtags-completions-enabled t)
+;;; (require 'company)
+;;; (global-company-mode)
+;;; (push 'company-rtags company-backends)
 
 ;; The C compiler flags to use.  Should have -I flags for system includes.
 (setq cmake-ide-flags-c '("-I/usr/include"))

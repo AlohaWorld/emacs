@@ -25,10 +25,16 @@
 ;      (if (eq system-type 'windows-nt)
 ;          '("windows-path/file.org")
 ;        '("unix-path/file.org")))
+(if (eq system-type 'windows-nt)
+	(defvar myDocument "D:/MyDocument/"))
 
-(defvar myDocument "D:/MyDocument/")
-(defvar basicPath (concat myDocument "60.Applications/emacs/.emacs.d/")
+(if (eq system-type 'cygwin)
+  	(defvar myDocument "/cygdrive/d/MyDocument/"))
+
+(if (eq system-type 'windows-nt)
+	(defvar basicPath (concat myDocument "60.Applications/emacs/.emacs.d/")
 	"所有emacs自定义目录所在的基础路径" )
+	(defvar basicPath "~/.emacs.d/"))
 
 (if (eq system-type 'windows-nt)
 	(defvar cygwin-root-path "c:/cygwin/"
@@ -37,7 +43,7 @@
 ;; Add some subdirs under ~/.emacs.d/lisp/ to load-path
 (let ((default-directory  (concat basicPath "lisp")))
   (normal-top-level-add-to-load-path '("init"     ;; init scripts
-									   "mylib"
+				   "mylib"
 									   "haskell-additional"
 									   "python"
 									   "theme"    ;; used in init-color-face.el
@@ -107,10 +113,12 @@
 
 ;; 必须在包管理功能加载后，才能load cygwin path			 
 ;; Load cygwin path (need cygwin-mount package)
-(setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
-(setq exec-path (cons "c:/cygwin/bin/" exec-path))
-(require 'cygwin-mount)
-(cygwin-mount-activate)
+(when (eq system-type 'windows-nt)
+	 (setenv "PATH" (concat "c:/cygwin/bin;c:/cygwin/usr/bin;c:/cygwin/usr/local/bin;" (getenv "PATH")))
+	 (setq exec-path (cons "c:/cygwin/bin/" exec-path))
+;;	 (require 'cygwin-mount)
+;;	 (cygwin-mount-activate)
+	 )
 			 
 ;; ===================================================================
 ;; 设置个人信息
@@ -382,6 +390,13 @@
 (require 'init-auto-complete)
 
 
+;; ====================================================
+;; set up yasnippet for programming
+;; TWO dirs for snippets
+;;    1. yas-installed-snippets-dir
+;;    2. ~/.emacs.d/snippets
+(load "init-yasnippet")
+
 ;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;++各种程序设计语言模式初始化++++++++++++++++++++++++++++++++++++++++++
 ;; 参见 basicPath/lisp/init/init-programming.el
@@ -555,5 +570,14 @@
 ; Choose if you want a clock with hands, or a
 ; seven-segment-display by setting `analog-clock-draw-function' to
 ; `analog-clock-draw-analog' or `analog-clock-draw-ssd'. 
-(setq analog-clock-draw-function #'analog-clock-draw-analog)
+(setq analog-clock-draw-function #'analog-clock-draw-ssd)
 
+;; ==================================================
+;; Display an analog clock with svg graph
+;; This package needs emacs-25
+;;     which has a package "DOM"
+;;(require 'svg-clock)
+
+;; ==================================================
+;; Document Template
+(custom-set-variables '(template-use-package t nil (template)))

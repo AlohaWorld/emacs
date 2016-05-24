@@ -131,7 +131,12 @@ occurence of CHAR."
 
 ;; ===================================================================
 ;; 启用文本补全
-(setq ispell-program-name (expand-file-name "bin/aspell.exe" cygwin-root-path))
+(if (eq system-type 'windows-nt)
+	(setq ispell-program-name (expand-file-name "bin/aspell.exe" cygwin-root-path)))
+
+(if (eq system-type 'cygwin)
+	(setq ispell-program-name "/usr/bin/aspell.exe"))
+
 (if (eq system-type 'windows-nt)
 	(global-set-key "\M-/" 'ispell-complete-word)
 )

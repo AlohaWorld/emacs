@@ -3,7 +3,7 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\Software\GNU\Emacs] 
 # Here is where I put my emacs config files.
 # i.e., ".emacs.d" directory should be put in the below path 
-"HOME"="d:\\MyDocument\\60.Applications\\emacs\\" 
+"HOME"="d:\\home\\cyd\\" 
 
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\Emacs.exe] 
