@@ -32,7 +32,7 @@
 (if (eq system-type 'cygwin)
   	(defvar myDocument "/cygdrive/d/MyDocument/"))
 
-(defvar basicPath "~/.emacs.d/")
+(defvar basicPath "~/.emacs.d/"
 	"Basic path for any customized dirs in emacs" )
 
 (if (eq system-type 'windows-nt)
@@ -42,13 +42,13 @@
 ;; Add some subdirs under ~/.emacs.d/lisp/ to load-path
 (let ((default-directory  (concat basicPath "lisp")))
   (normal-top-level-add-to-load-path '("init"     ;; init scripts
-										"mylib"
-									   "haskell-additional"
-									   "python"
-									   "theme"    ;; used in init-color-face.el
+				       "mylib"
+				       "haskell-additional"
+				       "python"
+				       "theme"    ;; used in init-color-face.el
 ;; org 目录中有个 contrib 子目录，其中包含额外的org功能文件,org-checklist.el 就在该目录中
-									   "org/contrib/lisp" ;; additional org-mode support
-									   )))
+				       "org/contrib/lisp" ;; additional org-mode support
+   )))
 
 ;; ==================================================
 ;; Set the default dir when using C-c C-f to open files
@@ -197,6 +197,7 @@
 		(add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
 		(add-to-list 'process-coding-system-alist
 			 '("zsh" . (undecided-dos . undecided-unix)))
+		)
 	)
 
 
