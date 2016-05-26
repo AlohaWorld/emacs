@@ -19,7 +19,7 @@
 ;; Add cmake-ide to enhance c/c++ programming
 (require 'rtags) ;; optional, must have rtags installed
 (require 'company-rtags)
-;; (cmake-ide-setup)
+(cmake-ide-setup)
 
 ;; Setup company-rtags
 (eval-after-load 'company

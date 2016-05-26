@@ -144,7 +144,3 @@
 
 (define-abbrev-table 'url-cookie-mode-abbrev-table '())
 
-(define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
-
-(define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
-

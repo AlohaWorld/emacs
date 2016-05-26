@@ -121,8 +121,8 @@
 	 (progn
 		(setenv "PATH" (concat "c:/cygwin/bin;c:/cygwin/usr/bin;c:/cygwin/usr/local/bin;" (getenv "PATH")))
 		(setq exec-path (cons "c:/cygwin/bin/" exec-path))
-;;	 (require 'cygwin-mount)
-;;	 (cygwin-mount-activate)
+	 (require 'cygwin-mount)
+	 (cygwin-mount-activate)
 	  )
 )
 			 
